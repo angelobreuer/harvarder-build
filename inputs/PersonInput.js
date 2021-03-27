@@ -1,5 +1,5 @@
 export const PersonInput = {
-    render: ({ value, oninput }) => {
+    render: ({ value, onInput }) => {
         const element = document.createElement('div');
         const container = document.createElement('div');
         value = value || [];
@@ -24,15 +24,15 @@ export const PersonInput = {
                     }
                     value.pop();
                     regenerate();
-                    oninput();
+                    onInput(value);
                 };
                 firstName.oninput = () => {
                     contributor.firstName = firstName.value;
-                    oninput();
+                    onInput(value);
                 };
                 lastName.oninput = () => {
                     contributor.lastName = lastName.value;
-                    oninput();
+                    onInput(value);
                 };
                 view.appendChild(firstName);
                 view.appendChild(lastName);
@@ -50,7 +50,7 @@ export const PersonInput = {
         addButton.onclick = () => {
             value.push({ firstName: '', lastName: '' });
             regenerate();
-            oninput();
+            onInput(value);
         };
         regenerate();
         element.appendChild(container);

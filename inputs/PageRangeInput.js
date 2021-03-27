@@ -1,5 +1,5 @@
 export const PageRangeInput = {
-    render: ({ value, oninput, required, placeholder }) => {
+    render: ({ value, onInput, required, placeholder }) => {
         var _a;
         const element = document.createElement('div');
         const startInput = document.createElement('input');
@@ -23,12 +23,14 @@ export const PageRangeInput = {
         startInput.style.backgroundColor = '#1F2022';
         endInput.style.backgroundColor = '#1F2022';
         startInput.oninput = () => {
+            value = value || {};
             value.start = startInput.valueAsNumber;
-            oninput();
+            onInput(value);
         };
         endInput.oninput = () => {
+            value = value || {};
             value.end = endInput.valueAsNumber;
-            oninput();
+            onInput(value);
         };
         return { element, value };
     }

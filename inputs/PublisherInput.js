@@ -1,8 +1,9 @@
 export const PublisherInput = {
-    render: ({ value, oninput, required }) => {
+    render: ({ value, onInput, required }) => {
         const element = document.createElement('div');
         const nameInput = document.createElement('input');
         const locationInput = document.createElement('input');
+        value = value || { name: '', location: '' };
         if (value) {
             nameInput.defaultValue = value.name;
             locationInput.defaultValue = value.location;
@@ -17,12 +18,14 @@ export const PublisherInput = {
         nameInput.style.backgroundColor = '#1F2022';
         locationInput.style.backgroundColor = '#1F2022';
         nameInput.oninput = () => {
+            value = value || {};
             value.name = nameInput.value || '';
-            oninput();
+            onInput(value);
         };
         locationInput.oninput = () => {
+            value = value || {};
             value.location = locationInput.value || '';
-            oninput();
+            onInput(value);
         };
         return { element, value };
     }
