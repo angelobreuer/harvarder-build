@@ -1,16 +1,18 @@
 import { PersonInput } from "../inputs/PersonInput.js";
 import { PublisherInput } from "../inputs/PublisherInput.js";
+import joinNotNull, { buildName } from "../util/StringHelper.js";
 import { Registry } from "./Citation.js";
 const BookCitationProvider = Registry.register('book', {
     generate: (data, node) => {
         // first author
         if (data.contributors.length > 0) {
             const author = data.contributors[0];
-            node.append(`${author.lastName}, ${author.firstName}`);
+            node.append(buildName([author.lastName, author.firstName]));
         }
         // secondary contributors
         data.contributors.slice(1).forEach(contributor => {
-            node.append(`, ${contributor.firstName} ${contributor.lastName}`);
+            node.append(`, `);
+            node.append(joinNotNull(" ", [contributor.firstName, contributor.lastName]));
         });
         // date
         node.append(` (${data.publishYear}): `);
