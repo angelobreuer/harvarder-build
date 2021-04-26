@@ -22,7 +22,7 @@ const BookCitationProvider = Registry.register('book', {
         node.append(', ');
         title.append(data.title);
         if (data.subtitle && data.subtitle.length > 0) {
-            title.append(`: ${data.subtitle} `);
+            title.append(`: ${data.subtitle}`);
         }
         // edition
         if (data.edition) {
